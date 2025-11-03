@@ -17,4 +17,4 @@ class database {
     }
 }
 
-export default new database
+export default new database()
