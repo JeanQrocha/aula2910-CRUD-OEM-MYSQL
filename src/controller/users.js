@@ -52,7 +52,7 @@ class ControllerUser {
         }
     }
 
-   async Delete(req, res) {
+    async Delete(req, res) {
         try {
             const id = req.params.id
 
@@ -62,6 +62,20 @@ class ControllerUser {
         } catch (error) {
             res.status(500).send({ error: error.message })
         }
+    }
+
+    async Login(req, res) {
+        try {
+            const { email, senha } = req.body
+
+            const token = await ServiceUser.Login(email, senha)
+
+            res.status(200).send({ token })
+        } catch (error) {
+            res.status(500).send({ error: error.message })
+        }
+
+
     }
 }
 

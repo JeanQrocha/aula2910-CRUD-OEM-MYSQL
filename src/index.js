@@ -7,6 +7,8 @@ const app = express();
 app.use(express.json())
 app.use('/api/v1', router)
 
+const port = 3000
+
 database.db
     .sync({ force: false })
     .then((_) => {
@@ -15,5 +17,4 @@ database.db
         })
     })
 
-const port = 3000
 
