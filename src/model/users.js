@@ -22,6 +22,11 @@ class User {
             ativo: {
                 type: database.db.Sequelize.STRING,
             },
+            permissao: {
+                //todo ENUM
+                type: database.db.Sequelize.INTEGER,
+                
+            }
         })
     }
 }

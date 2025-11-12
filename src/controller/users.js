@@ -6,7 +6,7 @@ import ServiceUser from "../service/users.js"
 
 class ControllerUser {
     FindAll(req, res) { //se nao for usar o primeiro parametro colocar um '_'
-        try {
+        try {   
             const user = ServiceUser.FindAll()
             res.send({ user })
 
@@ -31,7 +31,7 @@ class ControllerUser {
         try {
             const { nome, email, senha, ativo } = req.body
 
-            await ServiceUser.Create(nome, email, senha, ativo)
+            await ServiceUser.Create(nome, email, senha, ativo, 1)
 
             res.status(201).send()
         } catch (error) {
