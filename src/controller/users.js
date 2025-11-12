@@ -5,7 +5,7 @@ import ServiceUser from "../service/users.js"
 
 
 class ControllerUser {
-    async FindAll(req, res) { //se nao for usar o primeiro parametro colocar um '_'
+    async FindAll(req, res) { //se nao for usar o parametro colocar um '_'
         try {   
             const user = await ServiceUser.FindAll()
             res.send({ user })
@@ -18,7 +18,8 @@ class ControllerUser {
     async FindOne(req, res) {
         try {
 
-            const id = req.params.id
+            const id = req.params.id || req.headers?.user?.id
+
             const user = await ServiceUser.FindOne(id)
 
             res.send({ user })
@@ -29,6 +30,11 @@ class ControllerUser {
 
     async Create(req, res) {
         try {
+            const loggedUser = req.headers?.user
+            let permissao = 1
+            if(loggedUser){
+                permissao = req.body.permissao
+            }
             const { nome, email, senha, ativo } = req.body
 
             await ServiceUser.Create(nome, email, senha, ativo, 1)
@@ -41,7 +47,7 @@ class ControllerUser {
 
     Update(req, res) {
         try {
-            const id = req.params.id
+            const id = req.params.id || req.headers?.user?.id
             const { nome, email, senha, ativo } = req.body
 
             ServiceUser.Update(id, nome, email, senha, ativo)
@@ -54,7 +60,7 @@ class ControllerUser {
 
     async Delete(req, res) {
         try {
-            const id = req.params.id
+            const id = req.params.id || req.headers?.user?.id   
 
             await ServiceUser.Delete(id)
 
