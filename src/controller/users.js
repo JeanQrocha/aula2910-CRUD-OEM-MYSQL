@@ -5,9 +5,9 @@ import ServiceUser from "../service/users.js"
 
 
 class ControllerUser {
-    FindAll(req, res) { //se nao for usar o primeiro parametro colocar um '_'
+    async FindAll(req, res) { //se nao for usar o primeiro parametro colocar um '_'
         try {   
-            const user = ServiceUser.FindAll()
+            const user = await ServiceUser.FindAll()
             res.send({ user })
 
         } catch (error) {
